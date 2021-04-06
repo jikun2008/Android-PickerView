@@ -308,8 +308,14 @@ public class WheelView extends View {
     public final void setTextSize(float size) {
         if (size > 0.0F) {
             textSize = (int) (context.getResources().getDisplayMetrics().density * size);
-            paintOuterText.setTextSize(textSize);
             paintCenterText.setTextSize(textSize);
+        }
+    }
+
+    public final void setCenterTextSize(float size) {
+        if (size > 0.0F) {
+            centerTextSize = (int) (context.getResources().getDisplayMetrics().density * size);
+            paintCenterText.setTextSize(centerTextSize);
         }
     }
 
@@ -581,10 +587,11 @@ public class WheelView extends View {
         paintCenterText.getTextBounds(contentText, 0, contentText.length(), reMeasureRect);
         int width = reMeasureRect.width();
         int size = textSize;
+        int centerTextSize=this.centerTextSize;
         while (width > measuredWidth) {
             size--;
             //设置2条横线中间的文字大小
-            paintCenterText.setTextSize(size);
+            paintCenterText.setTextSize(centerTextSize);
             paintCenterText.getTextBounds(contentText, 0, contentText.length(), reMeasureRect);
             width = reMeasureRect.width();
         }
