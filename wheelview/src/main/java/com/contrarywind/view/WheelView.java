@@ -66,6 +66,7 @@ public class WheelView extends View {
 
     private String label;//附加单位
     private int textSize;//选项的文字大小
+    private int centerTextSize;//选中文字大小
     private int maxTextWidth;
     private int maxTextHeight;
     private int textXOffset;
@@ -139,6 +140,7 @@ public class WheelView extends View {
         super(context, attrs);
 
         textSize = getResources().getDimensionPixelSize(R.dimen.pickerview_textsize);//默认大小
+        centerTextSize=getResources().getDimensionPixelSize(R.dimen.pickerview_textsize);//默认大小
 
         DisplayMetrics dm = getResources().getDisplayMetrics();
         float density = dm.density; // 屏幕密度比（0.75/1.0/1.5/2.0/3.0）
@@ -161,6 +163,7 @@ public class WheelView extends View {
             dividerColor = a.getColor(R.styleable.pickerview_wheelview_dividerColor, 0xFFd5d5d5);
             dividerWidth = a.getDimensionPixelSize(R.styleable.pickerview_wheelview_dividerWidth, 2);
             textSize = a.getDimensionPixelOffset(R.styleable.pickerview_wheelview_textSize, textSize);
+            centerTextSize=a.getDimensionPixelOffset(R.styleable.pickerview_wheelview_centerTextSize, centerTextSize);
             lineSpacingMultiplier = a.getFloat(R.styleable.pickerview_wheelview_lineSpacingMultiplier, lineSpacingMultiplier);
             a.recycle();//回收内存
         }
@@ -204,7 +207,7 @@ public class WheelView extends View {
         paintCenterText.setAntiAlias(true);
         paintCenterText.setTextScaleX(1.1F);
         paintCenterText.setTypeface(typeface);
-        paintCenterText.setTextSize(textSize);
+        paintCenterText.setTextSize(centerTextSize);
 
         paintIndicator = new Paint();
         paintIndicator.setColor(dividerColor);
